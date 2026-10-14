@@ -62,13 +62,17 @@ sliced_last = full_name[len(first_name)+1:len(full_name)]
 print(f"Extracted First Name: {sliced_first}")
 print(f"Extracted Last Name: {sliced_last}")
 
-user_input = input("Enter a single character to search for: ")
-if len(user_input) != 1:
-    print("Error: Please restart and input exactly one character.")
-else:
+while True:
+    search_char = input("Enter a character to find: ")
+    sfull = full_name.casefold()
 
-    if user_input in full_name:
-        index = full_name.find(user_input)
-        print(f"The first index position is: {index}")
+    if search_char.casefold() in sfull:
+        all_indices = []
+        for index, char in enumerate(sfull):
+            if char == search_char.casefold():
+                all_indices.append(index)
+
+        print(f"Character '{search_char}' found at indices: {all_indices}")
+        break
     else:
-        print(f"'{user_input}' was not found in '{full_name}'.")
+        print(f"Character '{search_char}' was not found in the full name. Try again.")
